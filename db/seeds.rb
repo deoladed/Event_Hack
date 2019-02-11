@@ -14,28 +14,21 @@ puts 'Database cleaned !'
 
 puts 'Start seeding...'
 
-20.times do |i|
-	User.create(email: Faker::Internet.email,	encrypted_password: 'blank', description: Faker::ChuckNorris.fact, first_name: Faker::Hobbit.character, last_name: Faker::RickAndMorty.character)
+10.times do |i|
+	User.create(email: 'mailbidon@yopmail.com',	encrypted_password: 'blank', description: Faker::ChuckNorris.fact, first_name: Faker::Hobbit.character, last_name: Faker::RickAndMorty.character)
 	print i + 1
 	puts 'users created'
 end
 
 
 5.times do |i|
-	Event.create(start_date: Faker::Date.forward(23), 
-								duration: 55,
-								title: Faker::RickAndMorty.quote,
-								description: Faker::Lorem.paragraph_by_chars(100),
-								price: rand(1..1000),
-								location: Faker::RickAndMorty.location,
-								admin: User.all.sample
-								)
+	Event.create(start_date: Faker::Date.forward(23), duration: 55, title: Faker::RickAndMorty.quote, description: Faker::Lorem.paragraph_by_chars(100), price: rand(1..1000), location: Faker::RickAndMorty.location, admin: User.all.sample)
 	print i + 1
 puts 'events created'
 end
 
 
-40.times do |i|
+5.times do |i|
 	Attandance.create(stripe_customer_id: 'blank',
 										user: User.all.sample,
 										event: Event.all.sample

@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-	has_many :attandances
+	has_many :attandances, dependent: :destroy
 	has_many :user, through: :attandances
 	belongs_to :admin, class_name: 'User'
 
