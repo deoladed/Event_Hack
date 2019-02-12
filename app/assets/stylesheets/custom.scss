@@ -5,7 +5,17 @@
 
 $gray-medium-light: #eaeaea;
 
+@font-face {
+    font-family: 'alex_brushregular';
+    src: font_path('alexbrush-regular.woff2') format('woff2'),
+         font_path('alexbrush-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 /* universal */
+
 
 body {
 
@@ -33,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+ font-family: alex_brushregular;
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
