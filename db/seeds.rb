@@ -15,7 +15,7 @@ puts 'Database cleaned !'
 puts 'Start seeding...'
 
 10.times do
-	User.create(email: 'mailbidon@yopmail.com',	
+	User.create(email: Faker::Internet.email,	
 							encrypted_password: 'blank', 
 							description: Faker::ChuckNorris.fact, 
 							first_name: Faker::Hobbit.character, 

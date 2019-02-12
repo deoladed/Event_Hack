@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EventBrit</title>
+     <%= render 'layouts/head' %>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +11,16 @@
   </head>
 
   <body>
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/flashes' %>
+  
+  
+  <div class="container">
     <%= yield %>
+    <%= render 'layouts/footer' %>
+  </div>
+  
+
+    <%= render 'layouts/javascript' %>
   </body>
 </html>

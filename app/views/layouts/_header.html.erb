@@ -1,0 +1,37 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
+  <%= link_to 'EventHack', root_path, class:"navbar-brand logo" %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Events', root_path, class:'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+  <!-- ------------------------ DROPDOWN ACCOUNT ---------------   -->
+    <div class="dropdown navbar-right">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-user"></span> My Account
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% if user_signed_in? %>
+        <a class="dropdown-item" href="<%= edit_user_registration %>">Mon profile</a>
+        <a class="dropdown-item" href="<%= destroy_user_session_path %>">Se deconnecter</a>
+      <% else %>
+        <a class="dropdown-item" href="<%= new_user_session_path %>">Connection</a>
+        <a class="dropdown-item" href="<%= new_user_registration_path %>">Inscription</a>
+       <% end %> 
+      </div>
+    </div>
+
+  </div>
+</nav>
