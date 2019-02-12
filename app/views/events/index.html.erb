@@ -47,17 +47,23 @@
 	<div class="col-sm-2 well">
 	      <div class="thumbnail">
 	        <p>Upcoming Events:</p>
-	        <img src="paris.jpg" alt="Lyon" width="400" height="300">
+	        <%= image_tag("img.png", size: "400x300", alt: "Lyon", class: "img-circle") %>
 	        <p><strong><%= @events.last.location %></strong></p>
 	        <p><%= @events.last.start_date.to_s[0..-13] %></p>
 	        <%= link_to "Infos", event_path(@events.last.id), class:"btn btn-primary" %>
 	      </div>      
-	      <div class="well">
-	        <p>ADS</p>
-	      </div>
-	      <div class="well">
-	        <p>ADS</p>
-	      </div>
+
+	        			<p>Mes resas :</p>
+
+	      	<% if user_signed_in? && !current_user.attandances.blank? %>
+	      		<% current_user.attandances.each do |resa| %>
+	      			<%= link_to event_path(resa.event.id) do %>
+	      				<div class="well card-link">
+	        				<p><%= resa.event.title %></p>
+	      				</div>
+	      			<% end %>
+	      		<% end %>
+	      	<% end %>
 	</div>
 
 </div>

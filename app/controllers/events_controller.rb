@@ -11,9 +11,24 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event = Event.new
   end
 
   def create
+    p '#33333333333333333'
+    p params
+
+    post_params = params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
+
+    @event = Event.new(post_params)
+    @event.admin = current_user
+
+    if @event.save
+      flash.now[:success] = "Your event have been sucessfuly created! Thanks for your trust"
+      redirect_to event_path(@event.id)
+    else
+      render new_event_path
+    end
   end
 
   def destroy
