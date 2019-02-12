@@ -24,8 +24,8 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <% if user_signed_in? %>
-        <a class="dropdown-item" href="<%= edit_user_registration %>">Mon profile</a>
-        <a class="dropdown-item" href="<%= destroy_user_session_path %>">Se deconnecter</a>
+        <a class="dropdown-item" href="<%= users_show_path %>">Mon profile</a>
+        <%= link_to "Se deconnecter", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
       <% else %>
         <a class="dropdown-item" href="<%= new_user_session_path %>">Connection</a>
         <a class="dropdown-item" href="<%= new_user_registration_path %>">Inscription</a>
