@@ -14,26 +14,32 @@ puts 'Database cleaned !'
 
 puts 'Start seeding...'
 
-10.times do |i|
-	User.create(email: 'mailbidon@yopmail.com',	encrypted_password: 'blank', description: Faker::ChuckNorris.fact, first_name: Faker::Hobbit.character, last_name: Faker::RickAndMorty.character)
-	print i + 1
-	puts 'users created'
+10.times do
+	User.create(email: 'mailbidon@yopmail.com',	
+							encrypted_password: 'blank', 
+							description: Faker::ChuckNorris.fact, 
+							first_name: Faker::Hobbit.character, 
+							last_name: Faker::RickAndMorty.character)
 end
+puts '10 users created'
 
 
-5.times do |i|
-	Event.create(start_date: Faker::Date.forward(23), duration: 55, title: Faker::RickAndMorty.quote, description: Faker::Lorem.paragraph_by_chars(100), price: rand(1..1000), location: Faker::RickAndMorty.location, admin: User.all.sample)
-	print i + 1
-puts 'events created'
+5.times do
+	Event.create(start_date: Faker::Date.forward(23), 
+							 duration: 55, 
+							 title: Faker::Hacker.say_something_smart, 
+							 description: Faker::Lorem.paragraph_by_chars(100), 
+							 price: rand(1..1000), location: Faker::RickAndMorty.location, 
+							 admin: User.all.sample)
 end
+puts '5 events created'
 
 
-5.times do |i|
+5.times do
 	Attandance.create(stripe_customer_id: 'blank',
 										user: User.all.sample,
 										event: Event.all.sample
 									)	
-	print i + 1
-puts 'attandances created'
 end
+puts '5 attandances created'
 puts 'Database seeded, enjoy you new database'

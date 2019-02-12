@@ -56,7 +56,7 @@ RSpec.describe Event, type: :model do
       it {is_expected.to allow_value(5000).for(:duration)}
       it {is_expected.to_not allow_value(0).for(:duration)}
       it {is_expected.to_not allow_value(-5).for(:duration)}
-      it {is_expected.to_not allow_value(-5).for(:duration)}
+      it {is_expected.to_not allow_value(-56).for(:duration)}
       it {is_expected.to_not allow_value(77).for(:duration)}
 		end
 		describe "location" do
