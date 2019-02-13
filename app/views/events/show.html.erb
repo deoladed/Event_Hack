@@ -42,7 +42,7 @@
 
 					   		<div>
 					   			<% unless @usersattandances.include?(current_user) || @event.admin == current_user %>
-					   			<%= link_to "Reserver", new_attandance_path(@event.id), class:"btn btn-primary btn-lg" %></p>
+					   			<%= link_to "Reserver", new_event_attandance_path(@event.id), class:"btn btn-primary btn-lg" %></p>
 					   			<% end %>
 					   		</div>
 
