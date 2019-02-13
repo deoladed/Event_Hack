@@ -1,9 +1,18 @@
 class AttandancesController < ApplicationController
-	before_action: set_event
+	before_action :set_event, only: [:new, :create, :index]
+	before_action :is_not_your_event, only: [:index]
 
 	def set_event
-
+		@event = Event.find(params[:event_id])
+  	@amount = @event.price * 100
 	end
+
+  def is_not_your_event
+    unless @event.admin == current_user
+      flash[:danger] = 'Back off ! Not your event !'
+      redirect_to root_path
+    end
+  end
 
   def index
   end
@@ -11,45 +20,43 @@ class AttandancesController < ApplicationController
   def new
   	p '33333333333333'
   	p params
-  	@event = Event.find(params[:event_id])
-  	@amount = @event.price * 100
-
+  	@attandance = Attandance.new
+  	@usersattandances = @event.attandances.map {|attandance| attandance.user }
   end
 
   def create
-
-  	unless Stripe.new.payment(@amount)
   	p '66666666666666666'
   	p params
-  	@event = Event.find(params[:event_id])
-  	@amount = @event.price * 100
+  	
+  	unless @event.is_free
+	  	customer = Stripe::Customer.create(
+		    :email => params[:stripeEmail],
+		    :source  => params[:stripeToken]
+		  )
 
-	  customer = Stripe::Customer.create(
-	    :email => params[:stripeEmail],
-	    :source  => params[:stripeToken]
-	  )
-
-	  charge = Stripe::Charge.create(
-	    :customer    => customer.id,
-	    :amount      => @amount,
-	    :description => 'Rails Stripe customer', # CCE QUE JE VEUX QUI A DU SESNS
-	    :currency    => 'usd'
-	  )
-
-
+		  charge = Stripe::Charge.create(
+		    :customer    => customer.id,
+		    :amount      => @amount,
+		    :description => 'Rails Stripe customer',
+		    :currency    => 'eur'
+		  )
 		@attandance = Attandance.new(user: current_user, event: @event)
 		@attandance.stripe_customer_id = params[:stripeToken]
-
-		if @attandance.save
-			flash[:success] = 'Reservation reussie !'
-			redirect_to event_path(@event.id)
 		else
-			flash[:error] = 'Erreur lors de la reservation'
-			render :new
+		@attandance = Attandance.new(user: current_user, event: @event)
+		@attandance.stripe_customer_id = 'freeevent'
 		end
 
-	rescue Stripe::CardError => e
-	  flash[:error] = e.message
-	  redirect_to new_charge_path
+		if @attandance.save!
+			flash[:success] = 'Reservation reussie !'
+			# redirect_to event_path(@event.id)
+		else
+			flash[:error] = 'Erreur lors de la reservation'
+			p @attandance.errors
+			render :new
+		end
+		rescue Stripe::CardError => e
+		  flash[:error] = e.message
+		  redirect_to new_charge_path
 	end
 end

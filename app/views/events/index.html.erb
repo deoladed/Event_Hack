@@ -53,7 +53,6 @@
 	        <%= link_to "Infos", event_path(@events.last.id), class:"btn btn-primary" %>
 	      </div>      
 
-
 	      	<% if user_signed_in? && !current_user.attandances.blank? %>
 	        			<p>Mes resas :</p>
 	      		<% current_user.attandances.each do |resa| %>
@@ -62,8 +61,18 @@
 	        				<p><%= resa.event.title %></p>
 	      				</div>
 	      			<% end %>
-	      		<% end %>
+	      		<% end %>	      		
+	      	<% end %>
+		
+			<% if user_signed_in? && !current_user.attandances.blank? %>
+	        			<p>Mes event :</p>
+	      		<% current_user.events.each do |event| %>
+	      			<%= link_to event_path(event.id) do %>
+	      				<div class="well card-link">
+	        				<p><%= event.title %></p>
+	      				</div>
+	      			<% end %>
+	      		<% end %>	      		
 	      	<% end %>
 	</div>
-
 </div>

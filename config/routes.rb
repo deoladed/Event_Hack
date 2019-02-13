@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'attandances/index'
-  get 'attandances/new'
   get 'users/secret'
   devise_for :users, controllers: { registrations: "registrations" }
 

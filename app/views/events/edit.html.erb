@@ -1,9 +1,9 @@
-<% provide(:title, 'Create an event') %>
+<% provide(:title, 'Edit my event') %>
 
 <% if @event.errors.any? %>
 <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">Erreur!</h4>
-  <p>Nous n'avons pas réussi à créer l'event pour la (ou les) raison(s) suivante(s) :</p>  <ul>
+  <p>Nous n'avons pas réussi à modifier l'event pour la (ou les) raison(s) suivante(s) :</p>  <ul>
     <% @event.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
@@ -12,12 +12,13 @@
   <p class="mb-0">Veuillez reesayer, suivre les consignes et rester patient.</p>
 </div>
 <% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <br>
       <%= form_for(@event) do |f| %>
-      <h1 class="h3 mb-3 font-weight-normal text-center">Create your own event</h1>
+      <h1 class="h3 mb-3 font-weight-normal text-center">Edit your event</h1>
 
       <div class="form-group">
         <%= f.label :start_date, 'Date de debut' %><br />
@@ -43,13 +44,16 @@
         <%= f.label :description, 'Description' %><br />
         <%= f.text_area :description, autofocus: true, size: '40x10', class: "form-control" %>
       </div>
-
-
       <div class="actions mt-5">
-        <%= f.submit "Creer", class: "btn btn-lg btn-primary btn-block" %>
+        <%= f.submit "Edit", class: "btn btn-lg btn-primary btn-block" %>
       </div>
       <br><br>
       <% end %>
+
+          <br><br>
+      <h1 class="h4 mb-3 font-weight-normal text-center">Cancel my event</h1>
+      <p>Unhappy? Something wrong? <%= button_to "Cancel my event", event_path(@event.id), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-lg btn-primary btn-block" %></p>
+      <%= link_to "Back", :back %><br><br><br>
     </div>
   </div>
 </div>

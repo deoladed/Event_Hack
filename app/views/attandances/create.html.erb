@@ -1,3 +1,13 @@
-<h2>Thanks, you paid <strong><%= @amount/100 %>$</strong>!</h2>
 
-<p>Back to <%= link_to 'event', event_path(session[:event_id]) %></p>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+
+              <h2>Thanks, you paid <strong><%= @amount/100 %>$</strong>!</h2>
+
+			<p>Back to <%= link_to 'event', event_path(params[:event_id]) %></p>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,14 +1,40 @@
 class EventsController < ApplicationController
+  before_action :set_event, except: [:index, :new, :create]
+  before_action :authenticate_user!, only: [:edit]
+  before_action :is_not_your_event, only: [:edit]
+
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def is_not_your_event
+    unless @event.admin == current_user
+      flash[:danger] = 'Back off ! Not your event !'
+      redirect_to root_path
+    end
+  end
+
   def index
     @events = Event.all
   end
 
-  def show
-    @event = Event.find(params[:id])
+  def show    
     @usersattandances = @event.attandances.map {|attandance| attandance.user }
   end
 
   def edit
+  end
+
+  def update
+    post_params = params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
+  
+    if @event.update(post_params)
+      flash.now[:success] = "Your event have been sucessfuly modified!"
+      redirect_to event_attandances_path(@event.id)
+    else
+      render :edit
+    end
   end
 
   def new
@@ -30,5 +56,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
-  end
+    @event.destroy
+    flash[:danger] = 'Event deleted'
+    redirect_to root_path
+   end
 end

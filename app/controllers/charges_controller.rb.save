@@ -5,10 +5,10 @@ class ChargesController < ApplicationController
 	end
 
 	def create
-		  	p '1111111111111111111111'
+		p '1111111111111111111111'
   	p params
 	  # Amount in cents
-	  @amount = session[:amount]
+	  @amount = Event.find(params[:id]).price * 100
   
 	  customer = Stripe::Customer.create(
 	    :email => params[:stripeEmail],
@@ -21,6 +21,9 @@ class ChargesController < ApplicationController
 	    :description => 'Rails Stripe customer', # CCE QUE JE VEUX QUI A DU SESNS
 	    :currency    => 'usd'
 	  )
+
+	  # redirect_to action: attandances_path(:create)
+	  redirect_to new_event_attandance_path(action: :create, method: 'post', event_id: params[:id])
 
 	rescue Stripe::CardError => e
 	  flash[:error] = e.message

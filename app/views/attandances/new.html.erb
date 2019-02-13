@@ -33,32 +33,47 @@
 				    <hr class="my-0"><br>
 				    <p>Organise par : <%= @event.admin.first_name %><br><%= @event.admin.email %></p>
 				</div>
-				<div class="col-sm-12">
-					<h2 class="h4 mb-3 font-weight-normal text-center">Reservation pour 1 personne :</h2>  
-					<%= form_tag event_attandances_path(@event.id) do %>
-						<article>
-						<% if flash[:error].present? %>
-							<div id="error_explanation">
-								<p><%= flash[:error] %></p>
-							</div>
-						<% end %>
-						<label class="amount">
-							<span>Amount: <%= @amount/100 %>$</span>
-						</label>
-						</article>
+				<br>
+				<% if @event.is_free %>
+					<div class="col-sm-12 align-self-center">
+						<div class='col-sm-3'>
+						</div>
+						<div class="col-sm-6">
+					      <%= form_tag event_attandances_path do %>
+						      <h1 class="h4 mb-3 font-weight-normal text-center">Attend this event</h1>
+					      <%= button_to "Make a reservation", event_attandances_path, method: :create, class: "btn btn-lg btn-primary btn-block" %>
+					      <%= link_to "Back", :back %><br><br><br>
+							<% end %>
 
-						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-						data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-						data-description="A month's subscription"
-						data-amount="<%= @amount %>"
-						data-locale="auto"></script>
+					</div>
+				<% else %>
+					<% unless @usersattandances.include?(current_user) || @event.admin == current_user  %>
+						<div class="col-sm-12">
+							<h2 class="h4 mb-3 font-weight-normal text-center">Reservation pour 1 personne :</h2>  
+							<%= form_tag event_attandances_path do %>
+							<article>
+								<% if flash[:error].present? %>
+								<div id="error_explanation">
+									<p><%= flash[:error] %></p>
+								</div>
+								<% end %>
+								<label class="amount">
+									<span>Amount: <%= @amount/100 %>$</span>
+								</label>
+							</article>
+
+							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+							data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+							data-description="Event entry"
+							data-amount="<%= @amount %>"
+							data-locale="auto"></script>
+							<% end %>
+						</div>
+					<% else %>
+					<p>Evenement deja reserve!</p>
 					<% end %>
-				</div>
+				<% end %>
 	        </div>
-	   </div>
+	   </div> 
     </div>
-<!-- ---------------------------------------- FIN DESCRIPTION ----------------------- -->
-<!-- --------------------------- EVENT ------------------------------------ -->
-
-  
 </div>

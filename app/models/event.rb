@@ -19,7 +19,7 @@ class Event < ApplicationRecord
 		length: { in: 20..1000 }
 	validates :price, 
 	  presence: true, 
-	  numericality: { greater_than: 0, less_than: 1001 }
+	  numericality: { greater_than_or_equal_to: 0, less_than: 1001 }
 	validates :location, presence: true
 
 # SCOPE POUR AFFICHER PAR DATES DESC
@@ -30,5 +30,9 @@ class Event < ApplicationRecord
 
 	def duration_is_a_multiple_of_5
 		 errors.add(:duration, "Duration should be a mutiple of 5!") unless self.duration.present? && self.duration.multiple_of?(5)
+	end
+
+	def is_free
+		self.price == 0
 	end
 end

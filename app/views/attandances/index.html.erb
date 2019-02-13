@@ -1,2 +1,47 @@
-<h1>Attandances#index</h1>
-<p>Find me in app/views/attandances/index.html.erb</p>
+<div class="container text-center">    
+    <div class="col-sm-8">
+      <div class="row">
+<!-- ---------------------------------------- AVATAR + NOM ----------------------- -->
+		<% if @event.attandances.blank? %>
+		    <div class="col-sm-12">
+	          <div class="well">
+	            <h2 class="h4 mb-3 font-weight-normal text-center">Aucun inscrit :(</h2><br>
+	          
+	            <hr class="my-0">
+	          </div>
+	        </div>
+
+		<% else %>
+	        <div class="col-sm-12">
+	          <div class="panel panel-default">
+	            <div class="panel-body">
+		            <h2 class="h2 mb-3 font-weight-normal text-center"><%= @event.attandances.size %> inscrits :</h2>
+	            </div>
+	          </div>
+	        </div>
+		
+			<% @event.attandances.map{|attandance| attandance.user}.each do |user| %>
+		        <div class="col-sm-12">
+		          <div class="well">
+		            <h2 class="h4 mb-3 font-weight-normal text-center"><%= user.full_name %></h2>
+		            <hr class="my-0">
+		            <p class='text-center'><%= user.email %></p>
+		            <hr class="my-0">
+		          </div>
+		        </div>
+			<% end %>
+		<% end %>
+      </div>
+    </div>
+
+  	<div class="col-sm-4 well">
+	      <div class="thumbnail">
+	        <p><strong><%= @event.title %></strong></p>
+	        <%= image_tag("img.png", size: "400x300", alt: "Lyon", class: "img-circle") %>
+	        
+	        <%= link_to "Editer mon event", edit_event_path(@event.id), class: "btn btn-lg btn-primary btn-block" %><br>
+	      </div>      
+	</div>
+</div>
+
+
