@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @usersattandances = @event.attandances.map {|attandance| attandance.user }
   end
 
   def edit

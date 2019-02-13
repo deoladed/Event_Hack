@@ -13,7 +13,6 @@ User.destroy_all
 puts 'Database cleaned !'
 
 puts 'Start seeding...'
-
 10.times do
 	User.create!(email: Faker::Internet.email,	password: '#$taawktljasktlw4aaglj', description: Faker::ChuckNorris.fact, first_name: Faker::Movies::Hobbit.character, last_name: Faker::TvShows::RickAndMorty.character)
 end

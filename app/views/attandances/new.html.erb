@@ -1,0 +1,48 @@
+<% provide(:title, 'Reservation') %>
+
+
+<div class="container text-center">    
+    <div class="col-sm-12">
+<!-- -------------------------FIN PROFILE ------------------------------- -->
+    
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h2 class="h1 mb-3 font-weight-normal text-center"><%= @event.title %></h2>  
+              <p><%= @event.location %>, Lyon, France</p>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- ---------------------------------------- FIN STATUS ----------------------- -->
+      <div class="row mr-auto">
+	          <div class="well">
+	          	<div class="col-sm-8">
+					<%= image_tag("bird.jpg", alt: "Avatar") %>
+				</div>
+				<div class="col-sm-4">
+			            <h2 class="h4 mb-3 font-weight-normal text-center"><%= @event.description %></h2><br>
+			            <hr class="my-0">
+			            <hr class="my-0"><br>
+			    <p>Le <%= @event.start_date.to_s[0..-13] %>, duree : <%= @event.duration %> minutes</p>
+			    <hr class="my-0">
+			    <hr class="my-0"><br>
+			    <p>Tarif : <%= @event.price %>€</p>
+			    <hr class="my-0">
+			    <hr class="my-0"><br>
+			    <p>Organise par : <%= @event.admin.first_name %><br>
+			    <%= @event.admin.email %></p>
+				</div>
+				<div class="col-sm-12">
+			<h2 class="h4 mb-3 font-weight-normal text-center">Reservation pour 1 personne :</h2>  <%= render 'charges/new' %>
+
+				</div>
+	          </div>
+	   </div>
+    </div>
+<!-- ---------------------------------------- FIN DESCRIPTION ----------------------- -->
+<!-- --------------------------- EVENT ------------------------------------ -->
+
+  
+</div>
