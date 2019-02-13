@@ -15,9 +15,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    p '#33333333333333333'
-    p params
-
     post_params = params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
 
     @event = Event.new(post_params)
@@ -27,7 +24,7 @@ class EventsController < ApplicationController
       flash.now[:success] = "Your event have been sucessfuly created! Thanks for your trust"
       redirect_to event_path(@event.id)
     else
-      render new_event_path
+      render :new
     end
   end
 

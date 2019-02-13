@@ -5,7 +5,7 @@ FactoryBot.define do
     title { 'Factory Title' }
     description { Faker::Lorem.paragraph_by_chars(100) }
     price { rand(1..1000) }
-    location { Faker::RickAndMorty.location }
+    location { Faker::TvShows::RickAndMorty.location }
     admin { FactoryBot.create(:user) }
   end
 end

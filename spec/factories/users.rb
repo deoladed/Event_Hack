@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    encrypted_password { "blank" }
+    password { '#$taawktljasktlw4aaglj' }
     description { Faker::ChuckNorris.fact }
-    first_name { Faker::RickAndMorty.character }
-    last_name { Faker::RickAndMorty.character }
+    first_name { Faker::TvShows::RickAndMorty.character }
+    last_name { Faker::TvShows::RickAndMorty.character }
   end
 end

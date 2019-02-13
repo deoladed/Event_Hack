@@ -6,6 +6,8 @@
 Une database et un mailer fonctionnel
 
 ### Utilisation
-Apres le *git clone*, fais biensur un *bundle install*, puis un **rails db:seed**. Visite mailbidon@yopmail.com sur yopmail.com qui aura recu 10 mails d'inscription et 5 mails de nouveaulle inscription a un event =)
+Apres le *git clone*, fais biensur un *bundle install*, puis un **rails db:seed**. Visite mailbidon@yopmail.com sur yopmail.com qui aura recu 10 mails d'inscription et 5 mails de nouvealle inscription a un event =)
+
+### Version en production : https://eventhack.herokuapp.com/
 
 #### Courage jeune correcteur !
