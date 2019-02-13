@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get 'users/secret'
   devise_for :users, controllers: { registrations: "registrations" }
 
-  resources :events
-  resources :users, except: [:new, :create, :destroy, :index]
+  resources :events do
+  	resources :attandances
+  end
+  	
+  resources :users, except: [:new, :create, :destroy, :index] 
   resources :charges
-  resources :attandances
   root "events#index"
 end

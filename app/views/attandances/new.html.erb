@@ -17,28 +17,44 @@
       </div>
 <!-- ---------------------------------------- FIN STATUS ----------------------- -->
       <div class="row mr-auto">
-	          <div class="well">
+	        <div class="well">
 	          	<div class="col-sm-8">
 					<%= image_tag("bird.jpg", alt: "Avatar") %>
 				</div>
 				<div class="col-sm-4">
-			            <h2 class="h4 mb-3 font-weight-normal text-center"><%= @event.description %></h2><br>
-			            <hr class="my-0">
-			            <hr class="my-0"><br>
-			    <p>Le <%= @event.start_date.to_s[0..-13] %>, duree : <%= @event.duration %> minutes</p>
-			    <hr class="my-0">
-			    <hr class="my-0"><br>
-			    <p>Tarif : <%= @event.price %>€</p>
-			    <hr class="my-0">
-			    <hr class="my-0"><br>
-			    <p>Organise par : <%= @event.admin.first_name %><br>
-			    <%= @event.admin.email %></p>
+			        <h2 class="h4 mb-3 font-weight-normal text-center"><%= @event.description %></h2><br>
+			        <hr class="my-0">
+			        <hr class="my-0"><br>
+				    <p>Le <%= @event.start_date.to_s[0..-13] %>, duree : <%= @event.duration %> minutes</p>
+				    <hr class="my-0">
+				    <hr class="my-0"><br>
+				    <p>Tarif : <%= @event.price %>€</p>
+				    <hr class="my-0">
+				    <hr class="my-0"><br>
+				    <p>Organise par : <%= @event.admin.first_name %><br><%= @event.admin.email %></p>
 				</div>
 				<div class="col-sm-12">
-			<h2 class="h4 mb-3 font-weight-normal text-center">Reservation pour 1 personne :</h2>  <%= render 'charges/new' %>
+					<h2 class="h4 mb-3 font-weight-normal text-center">Reservation pour 1 personne :</h2>  
+					<%= form_tag attandances_path do %>
+						<article>
+						<% if flash[:error].present? %>
+							<div id="error_explanation">
+								<p><%= flash[:error] %></p>
+							</div>
+						<% end %>
+						<label class="amount">
+							<span>Amount: <%= @amount/100 %>$</span>
+						</label>
+						</article>
 
+						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+						data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+						data-description="A month's subscription"
+						data-amount="<%= @amount %>"
+						data-locale="auto"></script>
+					<% end %>
 				</div>
-	          </div>
+	        </div>
 	   </div>
     </div>
 <!-- ---------------------------------------- FIN DESCRIPTION ----------------------- -->
