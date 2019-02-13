@@ -24,7 +24,7 @@
 	          <div class="well">
 	           <p>In <%= event.location %></p>
 	           <%= image_tag("bird.jpg", size: "100x100", alt: "Avatar", class: "img-circle") %>
-	           <footer class="blockquote-footer"><%= event.start_date.to_s[0..-13] %><cite title="Source Title">- <%= event.duration %> minutes</cite></footer>
+	           <footer class="blockquote-footer"><%= event.date %><cite title="Source Title">- <%= event.duration %> minutes</cite></footer>
 	          </div>
 	        </div>
 <!-- ------------------------------- FIN AVATaR DEBUT DESCRIPTION ----------------------- -->
@@ -48,8 +48,8 @@
 	      <div class="thumbnail">
 	        <p>Upcoming Events:</p>
 	        <%= image_tag("img.png", size: "400x300", alt: "Lyon", class: "img-circle") %>
-	        <p><strong><%= @events.last.location %></strong></p>
-	        <p><%= @events.last.start_date.to_s[0..-13] %></p>
+	        <p><strong><%= @events.first.location %></strong></p>
+	        <p><%= @events.first.date %></p>
 	        <%= link_to "Infos", event_path(@events.last.id), class:"btn btn-primary" %>
 	      </div>      
 
@@ -64,7 +64,7 @@
 	      		<% end %>	      		
 	      	<% end %>
 		
-			<% if user_signed_in? && !current_user.attandances.blank? %>
+			<% if user_signed_in? && !current_user.events.blank? %>
 	        			<p>Mes event :</p>
 	      		<% current_user.events.each do |event| %>
 	      			<%= link_to event_path(event.id) do %>

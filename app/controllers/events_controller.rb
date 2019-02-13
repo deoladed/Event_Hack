@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    @events = Event.all.by_soon_date
   end
 
   def show    

@@ -41,7 +41,7 @@ class AttandancesController < ApplicationController
 		    :currency    => 'eur'
 		  )
 		@attandance = Attandance.new(user: current_user, event: @event)
-		@attandance.stripe_customer_id = params[:stripeToken]
+		@attandance.stripe_customer_id = charge.customer
 		else
 		@attandance = Attandance.new(user: current_user, event: @event)
 		@attandance.stripe_customer_id = 'freeevent'
