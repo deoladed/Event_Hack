@@ -22,6 +22,8 @@ class Event < ApplicationRecord
 	  numericality: { greater_than: 0, less_than: 1001 }
 	validates :location, presence: true
 
+# SCOPE POUR AFFICHER PAR DATES DESC
+
 	def in_future
 		errors.add(:start_date, "Event must be in the futur") unless self.start_date.present? && self.start_date > Date.today
 	end
