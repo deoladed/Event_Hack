@@ -42,7 +42,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    post_params = params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
+    post_params = params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location, :event_picture)
 
     @event = Event.new(post_params)
     @event.admin = current_user

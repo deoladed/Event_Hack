@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <br>
-      <%= form_for(@event) do |f| %>
+      <%= form_for(@event, multipart: true) do |f| %>
       <h1 class="h3 mb-3 font-weight-normal text-center">Create your own event</h1>
 
       <div class="form-group">
@@ -42,6 +42,10 @@
       <div class="form-group">
         <%= f.label :duration, 'Duree en minutes (multiple de 5)' %><br />
         <%= f.text_field :duration, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :event_picture, 'Add a picture to your event' %><br />
+        <%= f.file_field :event_picture %><br>
       </div>
       <div class="actions mt-5">
         <%= f.submit "Creer", class: "btn btn-lg btn-primary btn-block" %>
