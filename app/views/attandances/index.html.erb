@@ -47,12 +47,12 @@
 	        
 	        <%= link_to "Editer mon event", edit_event_path(@event.id), class: "btn btn-lg btn-primary btn-block" %><br>
 			<hr>
-	        <h1 class="h3 mb-3 font-weight-normal text-center">Add a picture to your event</h1>
-	        <hr>
-					   			<%= form_tag event_event_pictures_path(@event), multipart: true do %>
-					   				<%= file_field_tag :event_picture %><br>
-					   			<%= submit_tag "Upload", class: "btn btn-lg btn-primary btn-block" %><br><br><br>
-					   			<% end %>
+			<h1 class="h3 mb-3 font-weight-normal text-center">Add a picture to your event</h1>
+			<%= form_tag event_event_pictures_path(@event), multipart: true do %>
+				<%= file_field_tag :event_picture %><br>
+				<%= submit_tag "Upload", class: "btn btn-lg btn-primary btn-block" %>
+			<% end %>
+			<hr>
 	      </div>      
 	</div>
 </div>

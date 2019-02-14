@@ -23,6 +23,7 @@ class Event < ApplicationRecord
 	  presence: true, 
 	  numericality: { greater_than_or_equal_to: 0, less_than: 1001 }
 	validates :location, presence: true
+	validates :event_picture, presence: true
 
 # SCOPE POUR AFFICHER PAR DATES DESC
 scope :by_soon_date, -> { order(start_date: :asc)}
