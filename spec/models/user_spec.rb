@@ -21,6 +21,7 @@ RSpec.describe User, type: :model do
       it {is_expected.to allow_value("a@b.com").for(:email)}
       it {is_expected.to allow_value("cyber@snow.com").for(:email)}
       it {is_expected.to allow_value("cyber_snow@gmail.com").for(:email)}
+      it {is_expected.to allow_value("cyb@gil.com").for(:email)}
       # it {is_expected.to_not allow_value("cyber_snowgmail.com").for(:email)}
       # it {is_expected.to_not allow_value("cyber_sno@gmailcom").for(:email)}
       # it {is_expected.to_not allow_value("cyber_snow@").for(:email)}

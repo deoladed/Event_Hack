@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+	has_one_attached :event_picture
+
 	has_many :attandances, dependent: :destroy
 	has_many :user, through: :attandances
 	belongs_to :admin, class_name: 'User'

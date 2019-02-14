@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   	resources :attandances
   end
   	
-  resources :users, except: [:new, :create, :destroy, :index] 
+  resources :users, except: [:new, :create, :destroy, :index] do
+  	resources :avatars, only: [:create]
+  end
   resources :charges
   root "events#index"
 end

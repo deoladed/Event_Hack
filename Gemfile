@@ -3,6 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem "table_print"
+gem 'dotenv-rails'
+gem 'devise'
+gem 'faker'
+gem 'stripe'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 gem 'bootstrap-sass', '3.4.0'
@@ -55,6 +60,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'letter_opener'
+  gem 'guard-rspec', require: false
 end
 
 group :test do
@@ -71,8 +77,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem "table_print"
-gem 'dotenv-rails'
-gem 'devise'
-gem 'faker'
-gem 'stripe'
