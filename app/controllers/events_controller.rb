@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def show    
-    @usersattandances = @event.attandances.map {|attandance| attandance.user }
+    @attandances = Attandance.all
   end
 
   def edit

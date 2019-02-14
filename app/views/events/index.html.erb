@@ -19,11 +19,15 @@
 <!-- ---------------------------------------- FIN STATUS ----------------------- -->
       <div class="row">
 <!-- ---------------------------------------- AVATAR + NOM ----------------------- -->
-		<% @events.all.each do |event|  %>
+		<% @events.each do |event|  %>
 	        <div class="col-sm-3">
 	          <div class="well">
 	           <p>In <%= event.location %></p>
-	           <%= image_tag("bird.jpg", size: "100x100", alt: "Avatar", class: "img-circle") %>
+	            <%if event.event_picture.attached?%>
+                   <%= image_tag event.event_picture, alt: 'Event pic', size: "100x100", class: "rounded-circle" %>
+                <%else%>
+                  <%= image_tag("bird.jpg", size: "100x100", alt: "Avatar", class: "rounded-circle") %>
+                <% end %>           
 	           <footer class="blockquote-footer"><%= event.date %><cite title="Source Title">- <%= event.duration %> minutes</cite></footer>
 	          </div>
 	        </div>
@@ -47,11 +51,15 @@
 	<div class="col-sm-2 well">
 	      <div class="thumbnail">
 	        <p>Upcoming Events:</p>
-	        <%= image_tag("img.png", size: "400x300", alt: "Lyon", class: "img-circle") %>
 	        <% unless @events.blank? %>
+	        <%if @events.first.event_picture.attached?%>
+                   <%= image_tag @events.first.event_picture, alt: 'Event pic', class: "rounded" %>
+            <%else%>
+                   <%= image_tag("img.png", size: "400x300", alt: "Lyon", class: "rounded-circle") %>
+            <% end %> 	       
 		        <p><strong><%= @events.first.location %></strong></p>
 		        <p><%= @events.first.date %></p>
-		        <%= link_to "Infos", event_path(@events.last.id), class:"btn btn-primary" %>
+		        <%= link_to "Infos", event_path(@events.first.id), class:"btn btn-primary" %>
 		    <% end %>
 	      </div>      
 

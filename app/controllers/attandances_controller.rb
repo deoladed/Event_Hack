@@ -19,15 +19,11 @@ class AttandancesController < ApplicationController
   end
 
   def new
-  	p '33333333333333'
-  	p params
   	@attandance = Attandance.new
-  	@usersattandances = @event.attandances.map {|attandance| attandance.user }
   end
 
   def create
-  	p '66666666666666666'
-  	p params
+		@attandance = Attandance.new(user: current_user, event: @event)
   	
   	unless @event.is_free
 	  	customer = Stripe::Customer.create(
@@ -41,11 +37,9 @@ class AttandancesController < ApplicationController
 		    :description => 'Rails Stripe customer',
 		    :currency    => 'eur'
 		  )
-		@attandance = Attandance.new(user: current_user, event: @event)
-		@attandance.stripe_customer_id = charge.customer
+			@attandance.stripe_customer_id = charge.customer
 		else
-		@attandance = Attandance.new(user: current_user, event: @event)
-		@attandance.stripe_customer_id = 'freeevent'
+			@attandance.stripe_customer_id = 'freeevent'
 		end
 
 		if @attandance.save!

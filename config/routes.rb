@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'users/secret'
   devise_for :users, controllers: { registrations: "registrations" }
 
   resources :events do
   	resources :attandances
+    resources :event_pictures, only: [:create]
   end
   	
   resources :users, except: [:new, :create, :destroy, :index] do

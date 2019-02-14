@@ -37,9 +37,22 @@
   	<div class="col-sm-4 well">
 	      <div class="thumbnail">
 	        <p><strong><%= @event.title %></strong></p>
-	        <%= image_tag("img.png", size: "400x300", alt: "Lyon", class: "img-circle") %>
+	        <%if @event.event_picture.attached?%>
+	        	<%= image_tag @event.event_picture, alt: 'Event pic', width: 400 %><br>
+	        <%else%>
+	       		<%= image_tag("img.png", width: 400, alt: "Lyon", class: "img-circle") %>
+	        <p>=== Il n'y a pas encore de photo liée à cet event ===</p>
+	        <% end %>
+	        
 	        
 	        <%= link_to "Editer mon event", edit_event_path(@event.id), class: "btn btn-lg btn-primary btn-block" %><br>
+			<hr>
+	        <h1 class="h3 mb-3 font-weight-normal text-center">Add a picture to your event</h1>
+	        <hr>
+					   			<%= form_tag event_event_pictures_path(@event), multipart: true do %>
+					   				<%= file_field_tag :event_picture %><br>
+					   			<%= submit_tag "Upload", class: "btn btn-lg btn-primary btn-block" %><br><br><br>
+					   			<% end %>
 	      </div>      
 	</div>
 </div>

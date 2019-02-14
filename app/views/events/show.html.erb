@@ -19,7 +19,12 @@
       <div class="row mr-auto">
 	          <div class="well">
 	          	<div class="col-sm-8">
-					<%= image_tag("bird.jpg", alt: "Avatar") %>
+	          	<%if @event.event_picture.attached?%>
+                   <%= image_tag @event.event_picture, alt: 'Event pic', width: 500, class:'rounded' %>
+                <%else%>
+                   <%= image_tag("bird.jpg", alt: "Avatar") %>
+                    <p>=== Il n'y a pas encore d'avatar lié à cet event ===</p>
+                <% end %>					
 				</div>
 				<div class="col-sm-4">
 			            <div><h2 class="h4 mb-3 font-weight-normal text-center"><%= @event.date %> a <%= @event.hour %></h2></div>
@@ -41,13 +46,12 @@
 				    		<div><h2 class="h4 mb-3 font-weight-normal text-center"><%= @event.attandances.size %> INSCRITS !</h2></div>
 
 					   		<div class='pb-4 d-inline-block'>
-					   			<% unless @usersattandances.include?(current_user) || @event.admin == current_user %>
+					   		<% unless @event.admin == current_user || @attandances.find_by(event: @event, user: current_user) %>
 					   				<%= link_to "Reserver", new_event_attandance_path(@event.id), class:"btn btn-primary btn-lg" %>
-					   			<% end %>
+							<% end %>
 					   			<% if @event.admin == current_user %>
 									<%= link_to "Mon espace evenement", event_attandances_path(@event.id), class:"btn btn-primary btn-md" %>
 					   			<% end %>
-
 					   		</div>
 
 					   	</div>

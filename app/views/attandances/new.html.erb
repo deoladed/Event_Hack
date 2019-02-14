@@ -18,7 +18,12 @@
       <div class="row mr-auto">
 	        <div class="well">
 	          	<div class="col-sm-8">
-					<%= image_tag("bird.jpg", alt: "Avatar") %>
+					<%if @event.event_picture.attached?%>
+	                   <%= image_tag @event.event_picture, alt: 'Event pic', width: 400, class:'rounded' %>
+	                <%else%>
+	                   <%= image_tag("bird.jpg", alt: "Avatar") %>
+	                    <p>=== Il n'y a pas encore de photo liée à cet event ===</p>
+	                <% end %>	
 				</div>
 				<div class="col-sm-4">
 			        <h2 class="h4 mb-3 font-weight-normal text-center"><%= @event.description %></h2><br>
@@ -47,7 +52,7 @@
 						</div>
 					</div>
 				<% else %>
-					<% unless @usersattandances.include?(current_user) || @event.admin == current_user  %>
+					<% unless @event.attandances.find_by(event: @event, user: current_user) || @event.admin == current_user  %>
 						<div class="col-sm-12">
 							<h2 class="h4 mb-3 font-weight-normal text-center">Reservation pour 1 personne :</h2>  
 							<%= form_tag event_attandances_path do %>
