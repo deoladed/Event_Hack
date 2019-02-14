@@ -1,5 +1,6 @@
 class AttandancesController < ApplicationController
 	before_action :set_event, only: [:new, :create, :index]
+	before_action :authenticate_user!
 	before_action :is_not_your_event, only: [:index]
 
 	def set_event

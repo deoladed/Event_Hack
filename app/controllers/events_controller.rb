@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, except: [:index, :new, :create]
-  before_action :authenticate_user!, only: [:edit]
+  before_action :authenticate_user!, only: [:edit, :new, :create]
   before_action :is_not_your_event, only: [:edit]
 
 
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     post_params = params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
   
     if @event.update(post_params)
-      flash.now[:success] = "Your event have been sucessfuly modified!"
+      flash.now[:success] = "Your event have been successfully modified!"
       redirect_to event_attandances_path(@event.id)
     else
       render :edit
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
     @event.admin = current_user
 
     if @event.save
-      flash.now[:success] = "Your event have been sucessfuly created! Thanks for your trust"
+      flash.now[:success] = "Your event have been successfully created! Thanks for your trust"
       redirect_to event_path(@event.id)
     else
       render :new

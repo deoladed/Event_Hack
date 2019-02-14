@@ -37,4 +37,20 @@ puts '5 events created'
 									)	
 end
 puts '5 attandances created'
+  
+puts 'For real :'
+print User.all.count
+puts 'users crees'
+print Event.all.count
+puts 'event crees'
+print Attandance.all.count
+puts 'attandance crees'
+puts 'Last 3 :'
+  tp User.last(3)
+  tp Event.last(3)
+  tp Attandance.last(3)
+puts
+
+
+
 puts 'Database seeded, enjoy you new database'

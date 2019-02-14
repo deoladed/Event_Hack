@@ -23,13 +23,12 @@ RSpec.describe Event, type: :model do
 		end
     describe "#price" do
       it { expect(@event).to validate_presence_of(:price) }
-      it { expect(@event).to validate_numericality_of(:price).is_greater_than(0) }
+      it { expect(@event).to validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
       it { expect(@event).to validate_numericality_of(:price).is_less_than(1001) }
       it {is_expected.to allow_value(1).for(:price)}
       it {is_expected.to allow_value(200).for(:price)}
       it {is_expected.to allow_value(1000).for(:price)}
-      it {is_expected.to_not allow_value(0).for(:price)}
-
+      it {is_expected.to_not allow_value(-5).for(:price)}
       it {is_expected.to_not allow_value(1001).for(:price)}
 		end
     describe "#description" do
