@@ -20,6 +20,7 @@
       <div class="row">
 <!-- ---------------------------------------- AVATAR + NOM ----------------------- -->
 		<% @events.each do |event|  %>
+		  <% unless event.validate == false %>
 	        <div class="col-sm-3">
 	          <div class="well">
 	           <p>In <%= event.location %></p>
@@ -40,10 +41,15 @@
 	            <p><%= event.description %></p><br>
 	           	<div class="dropdown-divider"></div>
 	            <hr class="my-0">
-				<%= link_to "Plus d'infos", event_path(event.id), class:"btn btn-primary" %>
+	            <% unless event.validated.nil? || event.validated == false %>
+					<%= link_to "Plus d'infos", event_path(event.id), class:"btn btn-primary" %>
+				<% else %>
+					<p>En cours de validation..</p>
+				<% end %>
 	          </div>
 	        </div>
-<!-- ---------------------------------------- FIN DESCRIPTION ----------------------- -->
+	        <% end %>
+<!-- ---------------------------------------- FIN DESCRIPTION ----------------------- -->		  
 		<% end %>
       </div>
     </div>

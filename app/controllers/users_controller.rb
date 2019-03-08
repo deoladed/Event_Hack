@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def is_not_your_profile
-    unless params[:id].to_i == current_user.id
+    unless params[:id].to_i == current_user.id || current_user.is_admin
       flash[:danger] = 'Back off ! Not your profile !'
       redirect_to root_path
     end
@@ -33,4 +33,10 @@ class UsersController < ApplicationController
 	
   def secret
   end
+
+    def destroy
+    User.find(params[:id]).destroy
+    flash[:danger] = 'User deleted'
+    redirect_to admins_users_path
+   end
 end

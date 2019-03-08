@@ -1,0 +1,115 @@
+<% provide(:title, 'Edit my profile') %>
+     <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">        
+                <%= link_to 'Dashboard', admins_root_path, class:'nav-link active' %>
+              </li>
+              <li class="nav-item">        
+                <%= link_to 'Users', admins_users_path, class:'nav-link active' %>
+              </li>
+              <li class="nav-item">        
+                <%= link_to 'Events', admins_events_path, class:'nav-link active' %>
+              </li>
+              <li class="nav-item">        
+                <%= link_to 'Resas', admins_attandances_path, class:'nav-link active'%>
+              </li>
+                              
+                                <li class="nav-item">        
+                                     <%= link_to 'Validations', admins_pending_validations_path, class:'nav-link active'%>
+                                </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+
+<% if @user.errors.any? %>
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Erreur!</h4>
+  <p>Nous n'avons pas réussi à créer l'event pour la (ou les) raison(s) suivante(s) :</p>  
+  <ul>
+    <% @event.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <hr>
+  <p class="mb-0">Veuillez reesayer, suivre les consignes et rester patient.</p>
+</div>
+
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br>
+      <%= form_for(@user) do |f| %>
+      <h1 class="h3 mb-3 font-weight-normal text-center">Update your informations</h1>
+
+      <div class="form-group">
+        <%= f.label :first_name, 'Prenom' %><br />
+        <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, 'Nom' %><br />
+        <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, 'Description' %><br />
+        <%= f.text_area :description, autofocus: true, size: '40x10', class: "form-control" %>
+      </div>
+              <li class="nav-item">        
+          <%= link_to 'Validations', admins_pending_validations_path, class:'nav-link active'%>
+        </li>
+
+      <div class="actions mt-5">
+        <%= f.submit "Update", class: "btn btn-lg btn-primary btn-block" %>
+      </div>
+      <br><br>
+      <% end %>
+
+
+      <h1 class="h3 mb-3 font-weight-normal text-center">Change your profile picture</h1>
+      <%= form_tag user_avatars_path(@user), multipart: true do %>
+        <%= file_field_tag :avatar, class: "btn btn-sm btn-primary btn-block" %><br>
+        <%= submit_tag "Upload", class: "btn btn-lg btn-primary btn-block" %><br><br><br>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <%= render 'layouts/head' %>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= favicon_link_tag %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <%= render 'layouts/header_admins' %>
+  <%= render 'layouts/flashes' %>
+  
+  
+  <div class="container">
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </div>
+  
+
+    <%= render 'layouts/javascript' %>
+  </body>
+</html>

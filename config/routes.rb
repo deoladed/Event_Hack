@@ -7,9 +7,14 @@ Rails.application.routes.draw do
     resources :event_pictures, only: [:create]
   end
   	
-  resources :users, except: [:new, :create, :destroy, :index] do
+  resources :users, except: [:new, :create, :index] do
   	resources :avatars, only: [:create]
   end
   resources :charges
   root "events#index"
+
+  namespace :admins do
+    resources :users, :events, :attandances, :pending_validations
+    root 'admins#index'
+  end
 end
